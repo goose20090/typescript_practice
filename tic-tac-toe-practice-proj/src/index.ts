@@ -26,6 +26,13 @@ function createCell(row: number, col: number, content: Cell = "") {
   cell.setAttribute("data-col", col.toString());
   cell.setAttribute("data-content", content);
   cell.classList.add("cell");
+  cell.addEventListener("click", () => {
+    if (cell.getAttribute("data-content") === "") {
+      boardState[row][col] = currentMove;
+      currentMove = currentMove === "X" ? "O" : "X";
+      renderBoard();
+    }
+  });
   return cell;
 }
 
