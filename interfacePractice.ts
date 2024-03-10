@@ -1,7 +1,12 @@
 // Use write an interface that represents the data used in this function.
 // Annotate the function with your interface.
 
-interface Fruit {}
+interface Fruit {
+  name: string;
+  color: string;
+  sweetness: number;
+  stars: number;
+}
 
 function compileFruitReview(fruit: Fruit) {
   let review: string = `This ${fruit.name} has a nice ${fruit.color} color to it.`;
@@ -24,12 +29,16 @@ console.log(
 // Create an interface for an Apple by extending the Fruit interface you already made
 // Add a property to represent the variety of the apple, such as Fiji, Braeburn, etc.
 
-interface Apple {}
+interface Apple extends Fruit {
+  variety: string;
+}
 
 // Indexable Properties
 // Create an interface that represents the data used in this function.
 
-interface FruitCache {}
+interface FruitCache {
+  [id: string]: Fruit;
+}
 
 const fruitCache: FruitCache = {};
 
