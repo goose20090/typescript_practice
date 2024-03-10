@@ -3,19 +3,26 @@
 // union types.
 
 // Create a union type that represents either a string or an array of strings
-type StringOrStringArray = unknown;
+type StringOrStringArray = string | string[];
 
 const fruitName: StringOrStringArray = "Apple";
 const fruitList: StringOrStringArray = ["Apple", "Banana", "Pear"];
 
 // Create a union type that represents an array of numbers and strings
-type NumberAndStringArray = unknown;
+type NumberAndStringArray = (string | number)[];
 
 const assortedItems: NumberAndStringArray = ["Orange", 5, 2, "Strawberry", 1];
 
 // Create a union type that includes literal types for the days of the week
 // Don't use a string here
-type DaysOfTheWeek = unknown;
+type DaysOfTheWeek =
+  | "Monday"
+  | "Tuesday"
+  | "Wednesday"
+  | "Thursday"
+  | "Friday"
+  | "Saturday"
+  | "Sunday";
 
 const today: DaysOfTheWeek = "Friday";
 const tomorrow: DaysOfTheWeek = "Saturday";
@@ -35,13 +42,16 @@ interface Vegetable {
   name: string;
   hasSeeds: boolean;
 }
-type Food = unknown;
+type Food = Fruit | Vegetable;
 
 const apple: Food = { name: "Apple", sweetness: 80 };
 const onion: Food = { name: "Vegetable", hasSeeds: false };
 
 // Fix the problems in this function without changing the parameter or return types
 function getSweetness(fruit?: Fruit): number {
-  const sweetness = fruit.sweetness;
+  const sweetness = fruit?.sweetness;
+  if (!sweetness || sweetness === 0) {
+    throw new Error("No sweetness found!");
+  }
   return sweetness;
 }
