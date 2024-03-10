@@ -5,14 +5,22 @@ const boardElement = document.getElementById("board");
 const ROW_COUNT = 3;
 const COL_COUNT = 3;
 
-let boardState = [
-  ["", "", ""],
-  ["", "", ""],
-  ["", "", ""]
-];
-let currentMove = "X";
+type Cell = "X" | "O" | "";
 
-function createCell(row, col, content = "") {
+type ticTacToeBoard = [
+  [Cell, Cell, Cell],
+  [Cell, Cell, Cell],
+  [Cell, Cell, Cell]
+];
+
+let boardState: ticTacToeBoard = [
+  ["", "", ""],
+  ["", "", ""],
+  ["", "", ""],
+];
+let currentMove: "X" | "O" = "X";
+
+function createCell(row: number, col: number, content: Cell = "") {
   const cell = document.createElement("button");
   cell.setAttribute("data-row", row.toString());
   cell.setAttribute("data-col", col.toString());
@@ -48,7 +56,7 @@ function init() {
     boardState = [
       ["", "", ""],
       ["", "", ""],
-      ["", "", ""]
+      ["", "", ""],
     ];
     currentMove = "X";
     renderBoard();
