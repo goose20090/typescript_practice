@@ -2,21 +2,38 @@
 // Without changing the input or return types of the functions, fix all of the TypeScript errors with type narrowing
 // If the input is an invalid type, feel free to throw an error in your function.
 function doubleIfNumber(input: unknown) {
-  return input * 2;
+  if (typeof input === "number") {
+    return input * 2;
+  }
 }
 
 function combineValues(input1: unknown, input2: unknown): string | number {
-  return input1 + input2;
+  if (typeof input1 === "string" && typeof input2 === "string") {
+    return input1 + input2;
+  }
+  if (typeof input1 === "number" && typeof input2 === "number") {
+    return input1 + input2;
+  }
+  throw new Error("Invalid input");
 }
 
 function appendToArray(list: unknown, input: unknown): string[] {
-  return list.concat(input);
+  if (Array.isArray(list)) {
+    return list.concat(String(input));
+  }
+  return [];
 }
 
 function sumArray(list: unknown) {
-  return list.reduce((accumulator: number, item: number) => {
+  if (!Array.isArray(list)) throw new Error("list is not an array");
+  for (let item in list) {
+    if (typeof item !== "number") throw new Error("non-number in list");
+  }
+  const output: number = list.reduce((accumulator: number, item: number) => {
     return accumulator + item;
   }, 0);
+
+  return output;
 }
 
 // The type of "sum" should not be "any"
@@ -28,13 +45,15 @@ interface Fruit {
   eat?: () => void;
 }
 function shoutFruitName(fruit: object | Fruit) {
-  console.log(fruit.name.toUpperCase());
+  if ("name" in fruit) {
+    console.log(fruit.name.toUpperCase());
+  }
 }
 
 function shoutFruitColor(fruit: Fruit) {
-  console.log(fruit.color.toUpperCase());
+  console.log(fruit.color?.toUpperCase());
 }
 
 function eatFruit(fruit: Fruit) {
-  fruit.eat();
+  fruit.eat?.();
 }
