@@ -6,12 +6,10 @@
     "esModuleInterop": true,
     "sourceMap": true,
     "allowJs": true,
-    "lib": [
-      "esnext",
-      "dom"
-    ],
+    "lib": ["esnext", "dom"],
     "target": "es2019",
     "rootDir": "src",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "outDir": "dist"
   }
 }
