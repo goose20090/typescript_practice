@@ -6,17 +6,21 @@ interface MovingThing {
 // Add the necessary properties to allow for discriminating unions
 interface Car extends MovingThing {
   wheels: number;
+  type: "car";
 }
 interface Boat extends MovingThing {
   drag: number;
+  type: "boat";
 }
 interface Plane extends MovingThing {
   drag: number;
   engines: number;
+  type: "plane";
 }
 interface Train extends MovingThing {
   cars: number;
   wheels: number;
+  type: "train";
 }
 
 type Vehicle = Car | Boat | Plane | Train;
@@ -27,11 +31,18 @@ function speed(vehicle: Vehicle) {
   console.log(vehicle.speed);
 }
 function wheelCount(vehicle: Vehicle) {
-  console.log(vehicle.wheels);
+  if (vehicle.type === "car" || vehicle.type === "train") {
+    console.log(vehicle.wheels);
+  }
 }
 function dragAmount(vehicle: Vehicle) {
-  console.log(vehicle.drag);
+  //   if (vehicle.type === "boat" || vehicle.type === "plane") {
+  if ("drag" in vehicle) {
+    console.log(vehicle.drag);
+  }
 }
 function numberOfCars(vehicle: Vehicle) {
-  console.log(vehicle.cars);
+  if (vehicle.type === "train") {
+    console.log(vehicle.cars);
+  }
 }
