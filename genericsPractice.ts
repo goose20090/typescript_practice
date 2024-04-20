@@ -1,19 +1,19 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // Change these functions into generic functions by altering the
 // type signatures. There should be no `unknown` types when you are done
-function randomFromList(list: unknown[]) {
+function randomFromList<T>(list: T[]) {
   const length = list.length;
   const index = Math.floor(Math.random() * length);
   return list[index];
 }
-function duplicateList(list: unknown[], count: number = 1) {
-  let output: unknown[] = [];
+function duplicateList<T>(list: T[], count: number = 1) {
+  let output: T[] = [];
   for (let i = 0; i < count; i++) {
     output = output.concat(list);
   }
   return output;
 }
-function createTuple(item1: unknown, item2: unknown) {
+function createTuple<T, G>(item1: T, item2: G) {
   return [item1, item2];
 }
 
@@ -21,6 +21,6 @@ function createTuple(item1: unknown, item2: unknown) {
 interface Length {
   length: number;
 }
-function getLength(item: unknown): number {
+function getLength<T extends Length>(item: T): number {
   return item.length;
 }
